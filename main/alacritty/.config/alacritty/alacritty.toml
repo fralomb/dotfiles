@@ -1,0 +1,40 @@
+import = ["./theme/rose-pine-moon.toml"]
+
+[shell]
+program = "/bin/zsh"
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = 13
+
+[font.normal]
+family = "Hack Nerd Font"
+style = "Regular"
+
+[font.bold]
+family = "Hack Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "Hack Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "Hack Nerd Font"
+style = "Bold Italic"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[window]
+decorations = "Transparent" #"Full"
+padding = { x = 0, y = 15 }
+dynamic_padding = true
+dynamic_title = true
+opacity = 0.95
+blur = true
+startup_mode = "Maximized"
+option_as_alt = "OnlyLeft"
+

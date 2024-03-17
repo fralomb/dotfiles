@@ -1,0 +1,8 @@
+set -g @mode_indicator_prefix_prompt " WAIT "
+set -g @mode_indicator_prefix_mode_style "bg=default,fg=$color_foam,bold"
+set -g @mode_indicator_copy_prompt " COPY "
+set -g @mode_indicator_copy_mode_style "bg=default,fg=$thm_love,bold"
+set -g @mode_indicator_sync_prompt " SYNC "
+set -g @mode_indicator_sync_mode_style "bg=default,fg=$thm_iris,bold"
+set -g @mode_indicator_empty_prompt " TMUX "
+set -g @mode_indicator_empty_mode_style "bg=default,fg=$thm_foam,bold"

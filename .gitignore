@@ -1,0 +1,12 @@
+**/autoload/
+**/plugged/
+**/undodir/
+
+**/.zcompdump
+**/.zsh_sessions
+**/.DS_Store
+
+**/.tokens
+**/.zsh_history
+
+**/node_modules/

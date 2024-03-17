@@ -1,0 +1,178 @@
+#!/bin/bash
+
+# exit on error
+set -e
+# get the name of the script
+declare scriptname=$(basename $0)
+
+
+# print stacktrace when exiting with error
+function traperror () {
+    local err=$1 # error status
+    local line=$2 # LINENO
+    local linecallfunc=$3
+    local command="$4"
+    local funcstack="$5"
+    echo ""
+    echo "------"
+    echo "$0: ERROR --> command '$command' failed at line $line - exited with status: $err"
+
+    if [ "$funcstack" != "::" ]; then
+        echo -n "$(date) $(hostname) $0: DEBUG Error in ${funcstack} "
+        if [ "$linecallfunc" != "" ]; then
+            echo "called at line $linecallfunc"
+        else
+            echo
+        fi
+    fi
+    echo "------"
+    echo ""
+}
+
+function print_usage() {
+    echo ""
+    echo "This script will create / remove symlinks to/from TARGET of all files contained in FOLDER!"
+    echo "The script uses **stow** to manage the symlinks. Please install it first!"
+    echo ""
+    echo "./$scriptname [--install | -i] [--uninstall | -u] [--recursive | -r] [--target | -t] <TARGET_VALUE> FOLDER"
+    echo "   * [--install | -i]: will create symlinks to TARGET folder"
+    echo "   * [--uninstall | -u]: will remove previously created symlinks from TARGET folder (if any)"
+    echo "   * [--target | -t] TARGET_VALUE: the target folder (default: $HOME)"
+    echo "   * [--recursive | -r]: will iterate through dirs inside FOLDER and stow the content"
+    echo "   * [--help | -h]: show this menu"
+    echo "   * FOLDER: the source folder to use to create/delete the symlink"
+    echo ""
+}
+
+trap 'traperror $? $LINENO $BASH_LINENO "$BASH_COMMAND" $(printf "::%s" ${FUNCNAME[@]:-})' ERR
+
+declare -a ARGS
+declare RECURSIVE=false
+declare VERBOSE=false
+# read parameters
+while [[ $# -gt 0 ]]; do
+    case $1 in
+        -t|--target)
+            NEW_TARGET="$2"
+            shift # past argument
+            shift # past value
+            ;;
+        -i|--install)
+            COMMAND="install"
+            shift # past argument
+            ;;
+        -u|--uninstall)
+            COMMAND="uninstall"
+            shift # past argument
+            ;;
+        -r|--recursive)
+            RECURSIVE=true
+            shift # past argument
+            ;;
+        -v|--verbose)
+            VERBOSE=true
+            shift # past argument
+            ;;
+        -h|--help)
+            print_usage
+            exit 1
+            shift # past argument
+            ;;
+        -*|--*)
+            echo "Unknown option $1"
+            print_usage
+            exit 1
+            ;;
+        *)
+            ARGS+=("$1") # save positional arg
+            shift # past argument
+            ;;
+    esac
+done
+
+set -- "${ARGS[@]}" # restore positional parameters
+
+if [[ -z "$COMMAND" || ${#ARGS[@]} -eq 0 || ${#ARGS[@]} -ne 1 ]]; then
+    echo "Wrong usage!"
+    print_usage
+    exit 1
+fi
+
+declare target_folder="${NEW_TARGET:-$HOME}"
+declare root="$(git rev-parse --show-toplevel)"
+declare source_folder="$root/${ARGS[0]}"
+
+if [[ ! -d "$source_folder" ]]; then
+    echo "Source folder '$source_folder' does not exist."
+    exit 1
+fi
+
+# Check if stow is installed
+which stow > /dev/null 2>&1
+
+# Stow a file in the target directory
+create_symlink() {
+    local folder=${1:-NULL}
+    [[ -z $folder ]] && echo "Invalid folder path." && return
+    local target=""
+    if [[ -f $folder/.target ]]; then
+        target=$(cat $folder/.target)
+        echo "Using local target '$target'"
+    else
+        target=$default_target
+        echo "Using default target '$target'"
+    fi
+
+    local foldername=$(basename $folder)
+
+    echo "Creating symlink for ${foldername}.."
+    # delete if a symlink already exist
+    verbose_opt=""
+    [[ "$operation" == "uninstall" ]] && verbose_opt+="--verbose "
+    stow $verbose_opt --ignore=".target" --ignore=".DS_Store" --target=$target --dir=$root -D $foldername
+    if [[ "$operation" == "install" ]]; then
+        # create symlink
+        stow --verbose --ignore=".target" --ignore=".DS_Store" --target=$target --dir=$root $foldername
+        [[ $? -ne 0 ]] && echo "Failed." && return 1
+    fi
+    return 0
+}
+
+
+# @Params
+# $1 - cmd: [install | uninstall]
+# $2 - source_folder
+# $3 - target_folder
+function manage_symlinks() {
+    local cmd="$1"
+    local src="$2"
+    local src_rootpath=$(dirname $src)
+    local src_packagename=$(basename $src)
+    local dst="$3"
+    if [[ -z "$cmd" || -z "$src" || -z "$dst" ]]; then
+        echo "Something went wrong.. Skipping" && return
+    fi
+
+    local otheropts=""
+    [[ "$VERBOSE" == "true" ]] && otheropts="${otheropts} --verbose"
+
+    if [[ "$cmd" == "install" ]]; then
+        echo "Creating symlinks from source '$src' to target '$dst'"
+        stow ${otheropts} --dir="${src_rootpath}" --target="${dst}" "${src_packagename}"
+    elif [[ "$cmd" == "uninstall"  ]]; then
+        echo "Removing symlinks of source '$src' from target '$dst'"
+        stow ${otheropts} --dir="${src_rootpath}" --target="${dst}" --delete "${src_packagename}"
+    fi
+}
+
+if [[ "$RECURSIVE" == "true" ]]; then
+    # loop through all directories inside SOURCE_FOLDER
+    for subfolder in $(ls -d -- $source_folder/*)
+    do
+        manage_symlinks "$COMMAND" "$subfolder" "$target_folder"
+    done
+else
+    # stow SOURCE_FOLDER
+    manage_symlinks "$COMMAND" "$source_folder" "$target_folder"
+fi
+
