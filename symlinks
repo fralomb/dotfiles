@@ -110,35 +110,6 @@ fi
 # Check if stow is installed
 which stow > /dev/null 2>&1
 
-# Stow a file in the target directory
-create_symlink() {
-    local folder=${1:-NULL}
-    [[ -z $folder ]] && echo "Invalid folder path." && return
-    local target=""
-    if [[ -f $folder/.target ]]; then
-        target=$(cat $folder/.target)
-        echo "Using local target '$target'"
-    else
-        target=$default_target
-        echo "Using default target '$target'"
-    fi
-
-    local foldername=$(basename $folder)
-
-    echo "Creating symlink for ${foldername}.."
-    # delete if a symlink already exist
-    verbose_opt=""
-    [[ "$operation" == "uninstall" ]] && verbose_opt+="--verbose "
-    stow $verbose_opt --ignore=".target" --ignore=".DS_Store" --target=$target --dir=$root -D $foldername
-    if [[ "$operation" == "install" ]]; then
-        # create symlink
-        stow --verbose --ignore=".target" --ignore=".DS_Store" --target=$target --dir=$root $foldername
-        [[ $? -ne 0 ]] && echo "Failed." && return 1
-    fi
-    return 0
-}
-
-
 # @Params
 # $1 - cmd: [install | uninstall]
 # $2 - source_folder
@@ -151,6 +122,17 @@ function manage_symlinks() {
     local dst="$3"
     if [[ -z "$cmd" || -z "$src" || -z "$dst" ]]; then
         echo "Something went wrong.. Skipping" && return
+    fi
+    if [[ -f $src/.target ]]; then
+        local noexpanded=$(cat "$src/.target")
+        dst=$(eval echo "$noexpanded")
+        if [[ "$cmd" == "install" ]]; then
+            # create any directory if not exist yet
+            mkdir -p "$dst"
+        fi
+        echo "Using local dst '$dst'"
+    else
+        echo "Using default dst '$dst'"
     fi
 
     local otheropts=""
