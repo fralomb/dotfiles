@@ -10,3 +10,4 @@
 **/.zsh_history
 
 **/node_modules/
+**/gh/.config/gh/hosts.yml
