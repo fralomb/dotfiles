@@ -111,6 +111,7 @@ local servers = {
     tflint = require("lsp.tflint"),
     terraformls = require("lsp.terraformls"),
     gopls = require("lsp.gopls"),
+    htmx = require("lsp.htmxls"),
     omnisharp = require("lsp.omnisharp")
 }
 

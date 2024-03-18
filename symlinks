@@ -135,7 +135,7 @@ function manage_symlinks() {
         echo "Using default dst '$dst'"
     fi
 
-    local otheropts=""
+    local otheropts="--ignore=.target --ignore=.DS_Store"
     [[ "$VERBOSE" == "true" ]] && otheropts="${otheropts} --verbose"
 
     if [[ "$cmd" == "install" ]]; then

@@ -8,7 +8,8 @@ It will create / remove a symlink for each specified **package**, a collection o
 
 One or more packages will __appear__ to be installed in a **target directory**, the root tree in which the symlinks will be created.
 
-It is possible to ignore some files or directories, by specifing them in the `.stowrc` as a Perl REGEX.
+It is possible to ignore some files or directories passing it as a parameter through the `--ignore` option.
+Also, inside a package directory it can be defined a `.target` file, containing a path to a target file that differs from the current folder structure.
 
 Usage:
 ```
@@ -76,15 +77,25 @@ brew install --cask font-hack-nerd-font
   - Emmet toolkit for html, css and javascript development
   - `https://github.com/mattn/emmet-vim`
   - `https://raw.githubusercontent.com/mattn/emmet-vim/master/TUTORIAL`
-- ZSH: [doc](https://wiki.archlinux.org/title/zsh#History_search)
-- fzf: [doc](https://github.com/unixorn/fzf-zsh-plugin)
 - terraform:
   - `brew install hashicorp/tap/terraform-ls`
   - [doc](https://github.com/hashicorp/terraform-ls)
 - packer: `brew tap hashicorp/tap && brew install hashicorp/tap/packer`
--  watch: `brew install watch`
-- oathtool: `brew install oath-toolkit`
+- htmx: `cargo install htmx-lsp` - documentation [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#htmx)
 
 ### Brewfile
-Contains all the packages installed via homebrew
+Contains all the macOs packages installed via homebrew. Documentation [here](https://github.com/Homebrew/homebrew-bundle).
+To install all dependencies run `brew bundle install --verbose --file Brewfile` command.
+To get all the installed packages run `brew bundle dump --file=Brewfile` command.
+To uninstall all formulae not listed in the Brewfile run `brew bundle cleanup --force` command.
+To check if there is anything to install or upgrade in the Brewfile run `brew bundle check` command.
+To output the list of all entries in the Brewfile run `brew bundle list --all` command.
 
+### Other dependencies
+- ZSH: [doc](https://wiki.archlinux.org/title/zsh#History_search)
+- fzf: [doc](https://github.com/unixorn/fzf-zsh-plugin)
+- watch: `brew install watch`
+- oathtool: `brew install oath-toolkit`
+
+### Github Copilot
+Documentation [here](https://github.com/github/copilot.vim?tab=readme-ov-file)
