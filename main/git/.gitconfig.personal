@@ -1,0 +1,7 @@
+[user]
+    name = Francesco Lombardo
+    email = fra.lombardo92@gmail.com
+    signingkey = ~/.ssh/id_ed25519.pub
+
+[gpg]
+    format = ssh
