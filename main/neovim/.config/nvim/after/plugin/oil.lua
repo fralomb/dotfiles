@@ -261,11 +261,15 @@ local function oil_git(config)
       for index = 1, vim.api.nvim_buf_line_count(buffer) do
         local oil_entry = oil.get_entry_on_line(buffer, index)
         -- ignores: empty entry, .. parent directory, configured ignore_dirs
-        if oil_entry and oil_entry.name ~= ".." and not skip_dir(oil_entry.name) then
+        if oil_entry and (oil_entry.type == "file" or oil_entry.type == "directory") and not skip_dir(oil_entry.name) then
           -- look for changes for current entry
-          local oil_entry_fullpath = oil_dir .. oil_entry.name
+          local entry_suffix = ""
+          if oil_entry.type == "directory" then
+            entry_suffix = "/"
+          end
+          local oil_entry_fullpath = oil_dir .. oil_entry.name .. entry_suffix
           local oil_dir_relative = oil_entry_fullpath:match("^" .. escapeMagicChars(base_dir) .. "%/(.*)$")
-          -- print("relative: " .. oil_dir_relative)
+          -- print("match: " .. git_file.index)
           if git_file.index:match("^" .. escapeMagicChars(oil_dir_relative)) then
             -- print("match: " .. git_file.index)
             vim.api.nvim_buf_set_extmark(buffer, oil_git_namespace, index - 1, 0, {
