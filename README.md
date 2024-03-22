@@ -85,11 +85,11 @@ brew install --cask font-hack-nerd-font
 
 ### Brewfile
 Contains all the macOs packages installed via homebrew. Documentation [here](https://github.com/Homebrew/homebrew-bundle).
-To install all dependencies run `brew bundle install --verbose --file Brewfile` command.
-To get all the installed packages run `brew bundle dump --file=Brewfile` command.
-To uninstall all formulae not listed in the Brewfile run `brew bundle cleanup --force` command.
-To check if there is anything to install or upgrade in the Brewfile run `brew bundle check` command.
-To output the list of all entries in the Brewfile run `brew bundle list --all` command.
+- To install all dependencies run `brew bundle install --verbose --file Brewfile` command.
+- To get all the installed packages run `brew bundle dump --file=Brewfile` command.
+- To uninstall all formulae not listed in the Brewfile run `brew bundle cleanup --force` command.
+- To check if there is anything to install or upgrade in the Brewfile run `brew bundle check` command.
+- To output the list of all entries in the Brewfile run `brew bundle list --all` command.
 
 ### Other dependencies
 - ZSH: [doc](https://wiki.archlinux.org/title/zsh#History_search)

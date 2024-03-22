@@ -58,8 +58,8 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- Show spaces, tabs and eol
 vim.opt.list = true
--- vim.opt.listchars:append "tab:» "
-vim.opt.listchars:append "tab:  "
+vim.opt.listchars:append "tab:» "
+-- vim.opt.listchars:append "tab:  "
 -- vim.opt.listchars:append "space:⋅"
 vim.opt.listchars:append "trail:·"
 -- vim.opt.listchars:append "eol:¶"
