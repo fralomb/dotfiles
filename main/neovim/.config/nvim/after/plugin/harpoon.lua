@@ -49,21 +49,19 @@ vim.keymap.set("n", "<leader>ae", function() term.sendCommand(2, "genotp") end, 
 
 
 -- Rename current tmux window with name of project folder
-local utils = require("harpoon.utils")
-local rename_tmuxw_group = vim.api.nvim_create_augroup('rename_tmux_window', { clear = true })
-vim.api.nvim_create_autocmd('VimEnter', {
-	callback = function()
-		local dir_path = utils.split_string(vim.loop.cwd(), "/")
-		local window_name = dir_path[#dir_path]
-		local _, _, _ = utils.get_os_command_output({
-			"tmux",
-			"rename-window",
-			window_name,
-		}, vim.loop.cwd())
-
-	end,
-	group = rename_tmuxw_group,
-	pattern = '*',
-})
-
-
+-- local utils = require("harpoon.utils")
+-- local rename_tmuxw_group = vim.api.nvim_create_augroup('rename_tmux_window', { clear = true })
+-- vim.api.nvim_create_autocmd('VimEnter', {
+-- 	callback = function()
+-- 		local dir_path = utils.split_string(vim.loop.cwd(), "/")
+-- 		local window_name = dir_path[#dir_path]
+-- 		local _, _, _ = utils.get_os_command_output({
+-- 			"tmux",
+-- 			"rename-window",
+-- 			window_name,
+-- 		}, vim.loop.cwd())
+--
+-- 	end,
+-- 	group = rename_tmuxw_group,
+-- 	pattern = '*',
+-- })

@@ -45,7 +45,7 @@ zsh_add_file "config/prompt.zsh"
 zsh_add_file "config/aliases.zsh"
 zsh_add_file "config/key-bindings.zsh"
 zsh_add_file "config/krew.zsh"
-# install useful key bindings and fuzzy complation
+# install useful key bindings and fuzzy completion
 # $(brew --prefix)/opt/fzf/install --bin
 
 
@@ -54,6 +54,9 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 # enable autocompletion for aws
 complete -C '/usr/local/bin/aws_completer' aws
+
+# enable autocompletion for helm
+source <(helm completion zsh)
 
 # enable autocompletion for kubectl
 source <(kubectl completion zsh)

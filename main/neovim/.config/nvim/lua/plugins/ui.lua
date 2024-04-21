@@ -10,7 +10,7 @@ return {
     -- end,
   },
 
-  { "nvim-tree/nvim-web-devicons", lazy = true },
+  { "nvim-tree/nvim-web-devicons",         lazy = true },
 
   -- Set status line
   {
@@ -52,6 +52,13 @@ return {
 
 
   ---- Guess current buffer indentation
-  { "nmac427/guess-indent.nvim" }
+  { "nmac427/guess-indent.nvim" },
+
+  -- -- Tailwindcss integration
+  -- {
+  --   "luckasRanarison/tailwind-tools.nvim",
+  --   dependencies = { "nvim-treesitter/nvim-treesitter" },
+  --   enabled = true
+  -- }
 
 }
