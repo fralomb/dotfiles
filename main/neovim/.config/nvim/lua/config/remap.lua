@@ -37,5 +37,5 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 -- Copilot
-vim.keymap.set('i', '<M-l>', '<Plug>(copilot-accept-word)', { desc = 'Accept one word of the current suggestion' })
-vim.keymap.set('i', '<M-L>', '<Plug>(copilot-accept-line)', { desc = 'Accept entire line of the current suggestion' })
+-- vim.keymap.set('i', '<M-l>', '<Plug>(copilot-accept-word)', { desc = 'Accept one word of the current suggestion' })
+-- vim.keymap.set('i', '<M-L>', '<Plug>(copilot-accept-line)', { desc = 'Accept entire line of the current suggestion' })

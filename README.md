@@ -83,6 +83,7 @@ brew install --cask font-hack-nerd-font
 - packer: `brew tap hashicorp/tap && brew install hashicorp/tap/packer`
 - htmx: `cargo install htmx-lsp` - documentation [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#htmx)
 - tailwindcss: `npm install -g @tailwindcss/language-server` - documentation [here](https://github.com/tailwindlabs/tailwindcss-intellisense/tree/master/packages/tailwindcss-language-server) and [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tailwindcss)
+- angular: lsp can be installed via npm `npm install -g @angular/language-server`, angular cli can be installed running `npm install -g @angular/cli` - documentation [here](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#angularls)
 
 ### Brewfile
 Contains all the macOs packages installed via homebrew. Documentation [here](https://github.com/Homebrew/homebrew-bundle).

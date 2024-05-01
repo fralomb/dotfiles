@@ -45,12 +45,12 @@ vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
 })
 
 -- Disables Github Copilot for specific dir
-vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-  pattern = '*',
-  command = "Copilot disable"
-})
-
-vim.api.nvim_create_autocmd({ 'BufEnter' }, {
-  pattern = vim.fn.expand('$HOME/workspace') .. '/*',
-  command = "Copilot enable"
-})
+-- vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+--   pattern = '*',
+--   command = "Copilot disable"
+-- })
+--
+-- vim.api.nvim_create_autocmd({ 'BufEnter' }, {
+--   pattern = vim.fn.expand('$HOME/workspace') .. '/*',
+--   command = "Copilot enable"
+-- })

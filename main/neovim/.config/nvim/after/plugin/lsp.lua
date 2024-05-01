@@ -113,7 +113,8 @@ local servers = {
     gopls = require("lsp.gopls"),
     htmx = require("lsp.htmxls"),
     omnisharp = require("lsp.omnisharp"),
-    tailwindcss = require("lsp.tailwindls")
+    tailwindcss = require("lsp.tailwindls"),
+    angularls = require("lsp.angular")
 }
 
 -- Bridges mason with lspconfig plugin
