@@ -1,3 +1,4 @@
 other/** filter=git-crypt diff=git-crypt
 main/docker/** filter=git-crypt diff=git-crypt
+main/ai/** filter=git-crypt diff=git-crypt
 

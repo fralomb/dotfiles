@@ -3,14 +3,51 @@ if not status_ok then
     return
 end
 
+local status_ok, cmp_ai = pcall(require, "cmp_ai.config")
+if not status_ok then
+    return
+end
+
 local status_ok, luasnip = pcall(require, "luasnip")
 if not status_ok then
     return
 end
 
+cmp_ai:setup({
+    max_lines = 1000,
+    provider = 'Codestral',
+    provider_options = {
+        model = 'codestral-latest',
+    },
+    notify = true,
+    notify_callback = function(msg)
+        vim.notify(msg)
+    end,
+    run_on_every_keystroke = true,
+    ignored_file_types = {
+        -- default is not to ignore
+        -- uncomment to ignore in lua:
+        -- lua = true
+    },
+    mapping = {
+        ['<C-x>'] = cmp.mapping(
+            cmp.mapping.complete({
+                config = {
+                    sources = cmp.config.sources({
+                        { name = 'cmp_ai' },
+                    }),
+                },
+            }),
+            { 'i' }
+        ),
+    }
+
+})
+
 require('luasnip.loaders.from_vscode').lazy_load()
 luasnip.config.setup {}
 
+local compare = require('cmp.config.compare')
 -- Setup completion engine nvim-cmp
 cmp.setup({
     snippet = {
@@ -49,7 +86,22 @@ cmp.setup({
             end
         end, { "i", "s" }),
     }),
+    sorting = {
+        priority_weight = 2,
+        comparators = {
+            require('cmp_ai.compare'),
+            compare.offset,
+            compare.exact,
+            compare.score,
+            compare.recently_used,
+            compare.kind,
+            compare.sort_text,
+            compare.length,
+            compare.order,
+        },
+    },
     sources = cmp.config.sources({
+        -- { name = 'cmp_ai' },
         { name = "nvim_lsp" },
         { name = "nvim_lsp_signature_help" },
         { name = "path" },

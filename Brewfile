@@ -28,6 +28,9 @@ cask "session-manager-plugin"
 brew "awscli"
 brew "weaveworks/tap/eksctl"
 
+# Pulumi
+brew "pulumi/tap/pulumi"
+
 # Hashicorp
 tap "hashicorp/tap"
 brew "hashicorp/tap/packer"

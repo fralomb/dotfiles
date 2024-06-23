@@ -40,6 +40,7 @@ return {
   -- {
   --   'mhartington/formatter.nvim'
   -- },
+  {'tzachar/cmp-ai', dependencies = 'nvim-lua/plenary.nvim'},
 
   -- Autocompletion
   {
@@ -55,6 +56,8 @@ return {
       "saadparwaiz1/cmp_luasnip",
       -- Adds a number of user-friendly snippets
       'rafamadriz/friendly-snippets',
+      -- ai completion endpoint
+      'tzachar/cmp-ai'
     },
   },
 

@@ -71,3 +71,4 @@ zsh_add_file "config/fzf.zsh"
 # add GOBIN directory to path
 golangbin="$(go env GOPATH)/bin"
 export PATH=$PATH:$golangbin
+export CODESTRAL_API_KEY=$(cat $HOME/.config/codestral)
