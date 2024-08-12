@@ -19,11 +19,11 @@ telescope.setup {
 	defaults = {
 		mappings = {
 			n = {
-				["<c-t>"] = trouble.open_with_trouble,
+				["<c-t>"] = require("trouble.sources.telescope").open,
 				['<c-k>'] = require('telescope.actions').delete_buffer
 			},
 			i = {
-				["<c-t>"] = trouble.open_with_trouble,
+				["<c-t>"] = require("trouble.sources.telescope").open,
 				-- map actions.which_key to <C-h> (default: <C-/>)
 				-- actions.which_key shows the mappings for your picker,
 				-- e.g. git_{create, delete, ...}_branch for the git_branches picker

@@ -68,6 +68,9 @@ source $ZSH_UTILITIES/.utils
 zsh_add_file "config/jdtls-config.zsh"
 zsh_add_file "config/fzf.zsh"
 
+
+[[ ! -L "$HOME/.local/bin/docker" ]] && ln -sf "/opt/homebrew/bin/podman" "$HOME/.local/bin/docker"
+
 # add GOBIN directory to path
 golangbin="$(go env GOPATH)/bin"
 export PATH=$PATH:$golangbin
