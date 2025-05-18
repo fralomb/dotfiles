@@ -1,6 +1,5 @@
-import = ["./theme/rose-pine-moon.toml"]
 
-[shell]
+[terminal.shell]
 program = "/bin/zsh"
 
 [env]
@@ -37,4 +36,9 @@ opacity = 0.95
 blur = true
 startup_mode = "Maximized"
 option_as_alt = "OnlyLeft"
+
+[general]
+import = ["./theme/rose-pine-moon.toml"]
+
+[terminal]
 

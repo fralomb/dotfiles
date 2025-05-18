@@ -67,3 +67,6 @@ vim.opt.listchars:append "trail:·"
 -- Highlight cursor line and column
 vim.opt.cursorcolumn = true
 vim.opt.cursorline = true
+
+-- views can only be fully collapsed with the global statusline
+vim.opt.laststatus = 3
