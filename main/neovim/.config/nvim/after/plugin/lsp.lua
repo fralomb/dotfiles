@@ -122,10 +122,18 @@ mason_lspconfig.setup({
     ensure_installed = vim.tbl_keys(servers),
 })
 
-mason_lspconfig.setup_handlers({
-    function(server_name)
-        servers[server_name]["capabilities"] = capabilities
-        servers[server_name]["on_attach"] = on_attach
-        require("lspconfig")[server_name].setup(servers[server_name])
-    end,
-})
+-- Using the new vim.lsp.config and vim.lsp.enable APIs for server configuration
+for server_name, config in pairs(servers) do
+    -- Add capabilities and on_attach to each server's config
+    config.capabilities = capabilities
+    config.on_attach = on_attach
+    
+    -- Configure the server using the new API
+    vim.lsp.config(server_name, config)
+    -- Enable all the servers at once
+    vim.lsp.enable(server_name)
+end
+
+
+-- Enable built-in LSP completion
+vim.lsp.completion.enable()

@@ -70,6 +70,11 @@ cmp.setup({
         { name = "buffer" },
         { name = "luasnip" },
     }),
+    
+    -- Enable completion integration with built-in LSP completion
+    completion = {
+        completeopt = "menu,menuone,noinsert"
+    },
 })
 
 -- Set configuration for specific filetype.
