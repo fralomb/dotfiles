@@ -36,14 +36,4 @@ return {
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  -- Git status for oil
-  -- {
-  --   "refractalize/oil-git-status.nvim",
-  --
-  --   dependencies = {
-  --     "stevearc/oil.nvim",
-  --   },
-  --
-  --   config = true,
-  -- }
 }
