@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # `symlinks` Script Documentation
 
 The `symlinks` script is a utility designed to manage dotfiles within this repository using the **stow** command. It simplifies the process of creating and removing symbolic links for various configuration "packages."

@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # NPM Packages Documentation
 
 This document outlines the Node.js packages managed via the `package.json` file in this repository. These packages are primarily installed to enhance the capabilities of Neovim, particularly for Language Server Protocol (LSP) support and other development utilities.

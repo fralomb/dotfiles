@@ -27,4 +27,4 @@ The `symlinks` script is used to install or uninstall dotfile packages.
 ```
 
 ---
-This `README.md` provides a brief overview. For comprehensive information, please visit the [documentation site](https://fralomb.github.io/dotfiles/).
+This `README.md` provides a brief overview. For comprehensive information, please visit the [documentation site](https://fralomb.github.io/dotfiles/) which uses the Jekyll Hacker theme.

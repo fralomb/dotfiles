@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Neovim Configuration Details
 
 This document provides a comprehensive overview of the Neovim setup, including build prerequisites, plugin dependencies, Language Server Protocol (LSP) configurations, and other specific settings used in this dotfiles repository.

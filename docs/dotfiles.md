@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Dotfile Configurations
 
 This section provides a detailed look into the various dotfile configurations managed within this repository. These configurations are essential for personalizing the development environment, streamlining workflows, and ensuring consistency across different tools and systems.

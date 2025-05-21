@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Homebrew Packages and Setup
 
 This document details the macOS packages managed via the `Brewfile` in this repository. Homebrew is a package manager for macOS that simplifies the installation and management of software. Using a `Brewfile` allows for easy setup and replication of the development environment across multiple Macs.

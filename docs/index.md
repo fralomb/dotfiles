@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 # Welcome to Dotfiles Management Documentation
 
 This site provides a comprehensive guide to the collection of dotfiles, configurations for npm packages, Brew-installed tools, and the script for managing symlinks contained in this repository.
