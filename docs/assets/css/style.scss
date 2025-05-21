@@ -1,0 +1,84 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+// Add custom styles here
+body {
+  background-color: #151515;
+  color: #eaeaea;
+}
+
+header {
+  border-bottom: 1px dashed #b5e853;
+  padding-bottom: 20px;
+}
+
+.container {
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+a {
+  color: #63c0f5;
+  text-shadow: 0 0 5px rgba(104, 182, 255, 0.5);
+  &:hover {
+    color: #b5e853;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #b5e853;
+}
+
+#navigation {
+  margin-top: 40px;
+  border-top: 1px dashed #b5e853;
+  padding-top: 20px;
+}
+
+#navigation ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#navigation li {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+footer {
+  margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px dashed #b5e853;
+  text-align: center;
+}
+
+.heart {
+  color: #b5e853;
+}
+
+pre {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 10px;
+  font-size: 14px;
+  color: #b5e853;
+  border-radius: 2px;
+  word-wrap: normal;
+  overflow: auto;
+  overflow-y: hidden;
+}
+
+code.highlighter-rouge {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 0 3px;
+  margin: 0 2px;
+  color: #aa759f;
+  border-radius: 2px;
+}
+
+.highlight {
+  background: #222;
+}

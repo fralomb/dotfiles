@@ -1,0 +1,8 @@
+theme: jekyll-theme-hacker
+title: Dotfiles Documentation
+description: Comprehensive documentation for personal dotfiles and configurations
+show_downloads: false
+github:
+  repository_url: https://github.com/fralomb/dotfiles
+  owner_name: fralomb
+  is_project_page: true

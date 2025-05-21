@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    {% include head-custom.html %}
+    {% seo %}
+  </head>
+
+  <body>
+    <header>
+      <div class="container">
+        <a id="a-title" href="{{ '/' | relative_url }}">
+          <h1>{{ site.title | default: site.github.repository_name }}</h1>
+        </a>
+        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
+
+        <section id="downloads">
+          <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        {{ content }}
+      </section>
+    </div>
+
+    <div class="container">
+      <section id="navigation">
+        <h2>Navigation</h2>
+        <ul>
+          <li><a href="{{ '/' | relative_url }}">Home</a></li>
+          <li><a href="{{ '/dotfiles.html' | relative_url }}">Dotfiles</a></li>
+          <li><a href="{{ '/symlink-script.html' | relative_url }}">Symlink Script</a></li>
+          <li><a href="{{ '/brew.html' | relative_url }}">Homebrew Packages</a></li>
+          <li><a href="{{ '/npm.html' | relative_url }}">NPM Packages</a></li>
+          <li><a href="{{ '/neovim.html' | relative_url }}">Neovim Configuration</a></li>
+        </ul>
+      </section>
+    </div>
+
+    <footer>
+      <div class="container">
+        <p>Managed with <span class="heart">♥</span> by <a href="https://github.com/fralomb">fralomb</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
