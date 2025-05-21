@@ -1,11 +1,11 @@
 # Welcome to Dotfiles Management Documentation
 
-This site provides a comprehensive guide to the collection of personal and work dotfiles, configurations for npm packages, Brew-installed tools, and the script for managing symlinks contained in this repository.
+This site provides a comprehensive guide to the collection of dotfiles, configurations for npm packages, Brew-installed tools, and the script for managing symlinks contained in this repository.
 
 ## Overview
 
 The repository is structured to manage different types of configurations:
-- **Dotfiles:** Personal (`main`) and work-related (`other`) configurations for various tools. [Read more about dotfiles](./dotfiles.md)
+- **Dotfiles:** Configurations for various tools. [Read more about dotfiles](./dotfiles.md)
 - **Symlink Management:** A script (`symlinks`) to create and manage symbolic links for these dotfiles. [Learn about the symlink script](./symlink-script.md)
 - **Homebrew Packages:** A `Brewfile` to manage macOS packages installed via Homebrew. [See Homebrew package details](./brew.md)
 - **NPM Packages:** A `package.json` for project-specific Node.js dependencies. [Explore NPM packages](./npm.md)
@@ -21,7 +21,7 @@ It allows for easy installation and uninstallation of configuration packages.
 
 This repository includes a variety of dotfiles for system customization and development. These are separated into personal (`main/`) and work-specific (`other/`) categories.
 
-### Main (Personal) Configurations
+### Configurations
 These are personal configurations located in the `main/` directory.
 
 *   `alacritty`: Configuration for Alacritty, a fast, cross-platform terminal emulator.
@@ -35,14 +35,6 @@ These are personal configurations located in the `main/` directory.
 *   `terraform`: Configuration for Terraform, an infrastructure as code tool.
 *   `tmux`: Configuration for tmux, a terminal multiplexer.
 *   `zsh`: Configuration for Zsh, a powerful shell with advanced features.
-
-### Other (Work) Configurations
-These are configurations tailored for a work environment, located in the `other/` directory.
-
-*   `gh`: Work-specific GitHub CLI configurations.
-*   `git`: Work-specific Git configurations.
-*   `saml`: Configuration for SAML authentication tools.
-*   `zsh`: Work-specific Zsh configurations.
 
 [Read more about dotfile configurations](./dotfiles.md)
 
@@ -65,5 +57,3 @@ The detailed Neovim setup, including plugin management, LSPs, and specific confi
 [View full Neovim Setup and Configuration](./neovim.md)
 
 ---
-*This documentation is actively maintained. For the most up-to-date information, please refer to the repository or visit the [live documentation site](https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPOSITORY_NAME/).*
-Please replace `YOUR_GITHUB_USERNAME` and `YOUR_REPOSITORY_NAME` with your actual GitHub username and repository name.

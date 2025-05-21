@@ -2,15 +2,9 @@
 
 This section provides a detailed look into the various dotfile configurations managed within this repository. These configurations are essential for personalizing the development environment, streamlining workflows, and ensuring consistency across different tools and systems.
 
-The dotfiles are organized into two main categories:
-*   **Main (Personal) Configurations:** Located in the `main/` directory, these are general-purpose configurations for everyday use.
-*   **Other (Work) Configurations:** Located in the `other/` directory, these are tailored for specific work-related setups and tools.
-
 The `symlinks` script is used to manage these configurations by creating symbolic links from the repository to their appropriate locations in the user's home directory or other specified target directories.
 
-## Main (Personal) Configurations
-
-These configurations are found in the `main/` directory and represent the primary setup for various applications and utilities.
+## Configurations
 
 ### AI (`main/ai`)
 This directory contains configurations related to Artificial Intelligence tools.
@@ -81,35 +75,6 @@ Zsh (Z shell) is a powerful and highly customizable shell. This configuration en
     *   `main/zsh/.config/zsh/aliases/`: Directory likely containing files with alias definitions, possibly organized by topic.
     *   `main/zsh/.config/zsh/plugins/`: Could contain custom or manually installed plugins.
     *   `main/zsh/.config/zsh/themes/`: Contains themes, including the `powerlevel10k` configuration (`p10k.zsh`).
-
-## Other (Work) Configurations
-
-These configurations are found in the `other/` directory and are specifically tailored for a work environment. They often override or supplement the main personal configurations.
-
-### GitHub CLI (`other/gh`)
-Work-specific configurations for the GitHub CLI (`gh`).
-*   **Purpose:** This configuration likely sets up `gh` to interact with a work-related GitHub Enterprise instance or a different GitHub user account used for professional projects.
-*   **Key Files:**
-    *   `other/gh/hosts.yml.other`: This file would contain the connection and authentication details for the work GitHub instance. The `.other` suffix suggests it's intended to be symlinked or copied to the appropriate location (e.g., `~/.config/gh/hosts.yml`) when the work environment is active.
-    *   `other/gh/.target`: This file likely specifies that `hosts.yml.other` should be symlinked as `hosts.yml` in the `~/.config/gh/` directory.
-
-### Git (`other/git`)
-Work-specific Git configurations.
-*   **Purpose:** To manage a separate Git identity (user name, email) for work contributions and potentially different Git settings or aliases relevant to the work environment.
-*   **Key Files:**
-    *   `other/git/.gitconfig.other`: Contains work-specific Git settings, such as work email and name. This file is typically included in the main global `.gitconfig` using Git's `includeIf` directive, activated based on the repository path (e.g., when in a `~/work/` directory).
-
-### SAML (`other/saml`)
-Configuration for SAML (Security Assertion Markup Language) based authentication, often used for Single Sign-On (SSO) to various services.
-*   **Purpose:** This likely configures tools like `saml2aws` which allow authentication to AWS or other cloud providers using corporate SAML SSO credentials.
-*   **Key Files:**
-    *   `other/saml/.saml2aws`: The configuration file for `saml2aws`. It stores profiles for different SSO providers and AWS roles, allowing users to log in and retrieve temporary AWS credentials.
-
-### Zsh (`other/zsh`)
-Work-specific Zsh configurations.
-*   **Purpose:** To add aliases, functions, or environment variables specific to the work environment, such_as connecting to work servers, managing work-specific projects, or using internal tools.
-*   **Key Files:**
-    *   `other/zsh/.config/utilities/`: This directory likely contains shell scripts or utility functions that are primarily used in a work context. These might be sourced by a work-specific Zsh configuration file. The specific files (`aws`, `git`, `kubectl`, `terraform`) suggest utilities for interacting with these tools, possibly with pre-configured settings or wrappers for work projects.
 
 ---
 Properly managing these dotfiles ensures a tailored and efficient environment for both personal and professional tasks. Remember to use the `symlinks` script to install or update these configurations.
