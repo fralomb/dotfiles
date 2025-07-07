@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@angular/language-server": "^17.3.1",
-    "@anthropic-ai/claude-code": "^0.2.117"
+    "@anthropic-ai/claude-code": "^0.2.117",
+    "@openai/codex": "^0.1.2505172129"
   }
 }

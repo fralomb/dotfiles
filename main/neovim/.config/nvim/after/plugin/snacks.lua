@@ -10,7 +10,7 @@ Snacks.config.indent = {
 	animate = {
 		enabled = true,
 		style = "out",
-		easing = "inOutCubic" -- "linear",
+		easing = "inOutCubic", -- "linear",
 		duration = {
 			step = 10,         -- ms per step
 			total = 250,       -- maximum duration
@@ -126,3 +126,5 @@ Snacks.config.dashboard = {
 		{ section = "startup" },
 	},
 }
+
+
