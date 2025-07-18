@@ -26,8 +26,19 @@ return {
 		"j-hui/fidget.nvim",
 		version = "v1.6.1",
 		opts = {
+			-- notification = {
+			-- 	override_vim_notify = true
+			-- }
+			progress = {
+				-- LSP progress configuration
+				poll_rate = 0,
+				suppress_on_insert = false,
+				ignore_done_already = false,
+				ignore_empty_message = false,
+			},
 			notification = {
-				override_vim_notify = true
+				-- Disable general notifications, only handle LSP progress
+				override_vim_notify = false,
 			}
 		}
 	},

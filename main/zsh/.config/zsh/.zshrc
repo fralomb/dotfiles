@@ -74,6 +74,7 @@ zsh_add_file "config/fzf.zsh"
 # add GOBIN directory to path
 golangbin="$(go env GOPATH)/bin"
 export PATH=$PATH:$golangbin
+export GEMINI_API_KEY=$(cat $HOME/.config/gemini)
 export CODESTRAL_API_KEY=$(cat $HOME/.config/codestral)
 export MISTRAL_API_KEY=$(cat $HOME/.config/mistral)
 export MISTRAL_BASE_URL="https://api.mistral.ai/v1"

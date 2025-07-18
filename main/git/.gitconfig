@@ -3,3 +3,8 @@
 
 [includeIf "gitdir:~/workspace/"]
     path = ~/.gitconfig.other
+
+[color "status"]
+	added = green bold
+	changed = yellow
+	untracked = red

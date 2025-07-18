@@ -1,39 +1,54 @@
 return {
-  -- Telescope
-  {
-    "nvim-telescope/telescope.nvim",
-    -- tag = "0.1.4",
-    branch = '0.1.x',
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope-fzf-native.nvim",
-      "nvim-tree/nvim-web-devicons"
-    },
-  },
-  -- native telescope sorter to significantly improve sorting performance
-  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+	-- Harpoon
+	{ "theprimeagen/harpoon" },
 
-  -- Harpoon
-  { "theprimeagen/harpoon" },
+	-- Comment both lines and blocks
+	{ "numToStr/Comment.nvim" },
 
-  -- Comment both lines and blocks
-  { "numToStr/Comment.nvim" },
+	-- which-key
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"folke/snacks.nvim"
+		},
+	},
 
-  -- which-key
-  { "folke/which-key.nvim",                     event = "VeryLazy" },
+	-- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists
+	{
+		"folke/trouble.nvim",
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"folke/snacks.nvim"
+		},
+		specs = {
+			"folke/snacks.nvim",
+			opts = function(_, opts)
+				return vim.tbl_deep_extend("force", opts or {}, {
+					picker = {
+						actions = require("trouble.sources.snacks").actions,
+						win = {
+							input = {
+								keys = {
+									["<c-t>"] = {
+										"trouble_open",
+										mode = { "n", "i" },
+									},
+								},
+							},
+						},
+					},
+				})
+			end,
+		},
+	},
 
-  -- A pretty list for showing diagnostics, references, telescope results, quickfix and location lists
-  {
-    "folke/trouble.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-
-  -- File explorer
-  {
-    'stevearc/oil.nvim',
-    opts = {},
-    -- Optional dependencies
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
+	-- File explorer
+	{
+		'stevearc/oil.nvim',
+		opts = {},
+		-- Optional dependencies
+		dependencies = { "nvim-tree/nvim-web-devicons" },
+	},
 }

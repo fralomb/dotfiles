@@ -105,6 +105,7 @@ cmp.setup({
 		{ name = "buffer" },
 		{ name = "luasnip" },
 		{ name = 'minuet' },
+		{ name = "codecompanion" },
 	}),
 	performance = {
 		-- It is recommended to increase the timeout duration due to
