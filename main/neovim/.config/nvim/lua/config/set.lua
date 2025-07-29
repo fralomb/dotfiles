@@ -70,3 +70,6 @@ vim.opt.cursorline = true
 
 -- views can only be fully collapsed with the global statusline
 vim.opt.laststatus = 3
+
+-- automatically switch to existing tabs/windows when opening files
+vim.opt.switchbuf = { "usetab", "newtab" }

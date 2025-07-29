@@ -50,11 +50,11 @@ minuet.setup {
 codecompanion.setup({
 	strategies = {
 		chat = {
-			-- adapter = {
-			-- 	name = "copilot",
-			-- 	model = "claude-sonnet-4-20250514",
-			-- },
-			adapter = "gemini",
+			adapter = {
+				name = "gemini",
+				model = "gemini-2.5-pro",
+			},
+			-- adapter = "gemini",
 			-- slash_commands = {
 			-- 	["file"] = {
 			-- 	  -- Location to the slash command in CodeCompanion
@@ -78,7 +78,11 @@ codecompanion.setup({
 			}
 		},
 		inline = {
-			adapter = "gemini",
+			adapter = {
+				name = "gemini",
+				model = "gemini-2.5-pro",
+			},
+			-- adapter = "gemini",
 			keymaps = {
 				accept_change = {
 					modes = { n = "ga" },
@@ -91,7 +95,11 @@ codecompanion.setup({
 			},
 		},
 		cmd = {
-			adapter = "gemini",
+			adapter = {
+				name = "gemini",
+				model = "gemini-2.5-pro",
+			},
+			-- adapter = "gemini",
 		}
 	},
 	display = {
@@ -99,7 +107,7 @@ codecompanion.setup({
 			width = 95,
 			height = 10,
 			prompt = "Prompt ",         -- Prompt used for interactive LLM calls
-			provider = "snacks",     -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks". If not specified, the plugin will autodetect installed providers.
+			provider = "default",       -- Can be "default", "telescope", "fzf_lua", "mini_pick" or "snacks". If not specified, the plugin will autodetect installed providers.
 			opts = {
 				show_default_actions = true, -- Show the default actions in the action palette?
 				show_default_prompt_library = true, -- Show the default prompt library in the action palette?

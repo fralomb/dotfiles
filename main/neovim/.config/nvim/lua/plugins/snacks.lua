@@ -145,6 +145,7 @@ return {
 							["<C-c>"] = { "cancel", mode = "i" },
 							["<C-w>"] = { "<c-s-w>", mode = { "i" }, expr = true, desc = "delete word" },
 							["<CR>"] = { "confirm", mode = { "n", "i" } },
+							-- ["<CR>"] = { "tab", mode = { "n", "i" } },
 							["<Down>"] = { "list_down", mode = { "i", "n" } },
 							["<Esc>"] = "cancel",
 							["<S-CR>"] = { { "pick_win", "jump" }, mode = { "n", "i" } },
@@ -195,13 +196,14 @@ return {
 						finder = "buffers",
 						format = "buffer",
 						hidden = false,
-						unloaded = true,
+						unloaded = false,
 						current = true,
 						sort_lastused = true,
 						win = {
 							input = {
 								keys = {
 									["<c-x>"] = { "bufdelete", mode = { "n", "i" } },
+									-- ["<cr>"] = { "edit", mode = { "n", "i" } }, -- Enter opens in new tab
 								},
 							},
 							list = { keys = { ["dd"] = "bufdelete" } },
@@ -220,7 +222,7 @@ return {
 							'%.git/',
 							'site%-packages',
 							'%.terraform'
-						}
+						},
 					},
 					grep = {
 						finder = "grep",
@@ -235,7 +237,7 @@ return {
 							'%.git/',
 							'site%-packages',
 							'%.terraform'
-						}
+						},
 					},
 					cliphist = {
 						finder = "system_cliphist",

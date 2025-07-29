@@ -73,6 +73,7 @@ brew "hashicorp/tap/terraform-ls"
 brew "tflint"
 brew "efm-langserver"
 brew "stylua"
+brew "pipx"
 
 # apps
 cask "alacritty", args: { no_quarantine: true }

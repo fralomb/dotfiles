@@ -74,7 +74,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 		-- (name.ext.tpl/tmpl)
 		if #parts >= 3 and (parts[#parts] == 'tpl' or parts[#parts] == 'tmpl') then
 			local nested_ext = parts[#parts - 1]
-			print('Setting filetype to: ' .. nested_ext .. ' for file: ' .. filename)
+			vim.notify('Setting filetype to: ' .. nested_ext .. ' for file: ' .. filename)
 			vim.bo.filetype = nested_ext
 		end
 	end,

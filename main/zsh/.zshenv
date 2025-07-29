@@ -16,5 +16,6 @@ export BAT_CONFIG_PATH="$HOME/.config/bat"
 
 usrlocalbin="/usr/local/bin"
 localbin="$HOME/.local/bin"
-export PATH=$PATH:$localbin:$usrlocalbin
+pip_venv="$HOME/.local/pip/bin"
+export PATH=$PATH:$pip_venv:$localbin:$usrlocalbin
 source "$HOME/.cargo/env"

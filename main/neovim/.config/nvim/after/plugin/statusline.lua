@@ -71,7 +71,45 @@ lualine.setup {
 		lualine_a = {
 			{
 				'tabs',
-				mode = 0,
+				mode = 1,
+				path = 0,
+				max_length = vim.o.columns,
+				use_mode_colors = true,
+				show_modified_status = true, -- Shows a symbol next to the tab name if the file has been modified.
+				symbols = {
+					modified = '', -- Text to show when the file is modified.
+				},
+
+				fmt = function(name, context)
+					local buflist = vim.fn.tabpagebuflist(context.tabnr)
+					local winnr = vim.fn.tabpagewinnr(context.tabnr)
+					local bufnr = buflist[winnr]
+
+					if not bufnr or bufnr == -1 then
+						return name
+					end
+
+					local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+					local buf_name = name
+
+					if ft == 'oil' then
+						-- For oil buffers, use the directory name.
+						-- fnamemodify(':t') gets the tail of the path.
+						local oil_dir_path = require("oil").get_current_dir(bufnr)
+						if oil_dir_path == '' then -- Handle root case like "/"
+							oil_dir_path = name
+						end
+						buf_name = '󰙅 ' .. oil_dir_path
+					elseif ft == 'snacks_dashboard' then
+						buf_name = '󰨝 Dashboard'
+					elseif ft == 'snacks_picker_input' then
+						buf_name = ' Picker'
+					else
+						-- For all other type of files show an icon in case it has been modified
+					end
+
+					return buf_name
+				end,
 				-- show only when multiple tabs are enabled
 				cond = function()
 					local count = 0
@@ -107,15 +145,15 @@ lualine.setup {
 		},
 		lualine_x = {
 			{
-                require 'minuet.lualine',
-                -- the follwing is the default configuration
-                -- the name displayed in the lualine. Set to "provider", "model" or "both"
-                -- display_name = 'both',
-                -- separator between provider and model name for option "both"
-                -- provider_model_separator = ':',
-                -- whether show display_name when no completion requests are active
-                -- display_on_idle = false,
-            },
+				require 'minuet.lualine',
+				-- the follwing is the default configuration
+				-- the name displayed in the lualine. Set to "provider", "model" or "both"
+				-- display_name = 'both',
+				-- separator between provider and model name for option "both"
+				-- provider_model_separator = ':',
+				-- whether show display_name when no completion requests are active
+				-- display_on_idle = false,
+			},
 			'encoding',
 			'fileformat',
 			'filetype',
