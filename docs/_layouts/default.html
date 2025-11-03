@@ -10,43 +10,101 @@
   </head>
 
   <body>
-    <header>
-      <div class="container">
-        <a id="a-title" href="{{ '/' | relative_url }}">
-          <h1>{{ site.title | default: site.github.repository_name }}</h1>
-        </a>
-        <h2>{{ site.description | default: site.github.project_tagline }}</h2>
-
-        <section id="downloads">
-          <a href="{{ site.github.repository_url }}" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+    <!-- Material Design App Bar -->
+    <header class="mdc-top-app-bar">
+      <div class="mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="menu-button">menu</button>
+          <a href="{{ '/' | relative_url }}" class="mdc-top-app-bar__title">
+            {{ site.title | default: site.github.repository_name }}
+          </a>
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+          <a href="{{ site.github.repository_url }}" class="mdc-icon-button material-icons github-button" title="View on GitHub" target="_blank">code</a>
         </section>
       </div>
     </header>
 
-    <div class="container">
-      <section id="main_content">
-        {{ content }}
-      </section>
-    </div>
-
-    <div class="container">
-      <section id="navigation">
-        <h2>Navigation</h2>
-        <ul>
-          <li><a href="{{ '/' | relative_url }}">Home</a></li>
-          <li><a href="{{ '/dotfiles.html' | relative_url }}">Dotfiles</a></li>
-          <li><a href="{{ '/symlink-script.html' | relative_url }}">Symlink Script</a></li>
-          <li><a href="{{ '/brew.html' | relative_url }}">Homebrew Packages</a></li>
-          <li><a href="{{ '/npm.html' | relative_url }}">NPM Packages</a></li>
-          <li><a href="{{ '/neovim.html' | relative_url }}">Neovim Configuration</a></li>
-        </ul>
-      </section>
-    </div>
-
-    <footer>
-      <div class="container">
-        <p>Managed with <span class="heart">♥</span> by <a href="https://github.com/fralomb">fralomb</a></p>
+    <!-- Navigation Drawer -->
+    <aside class="mdc-drawer" id="drawer">
+      <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+          <a class="mdc-list-item" href="{{ '/' | relative_url }}">
+            <span class="mdc-list-item__ripple"></span>
+            <i class="material-icons mdc-list-item__graphic">home</i>
+            <span class="mdc-list-item__text">Home</span>
+          </a>
+          <a class="mdc-list-item" href="{{ '/dotfiles.html' | relative_url }}">
+            <span class="mdc-list-item__ripple"></span>
+            <i class="material-icons mdc-list-item__graphic">settings</i>
+            <span class="mdc-list-item__text">Dotfiles</span>
+          </a>
+          <a class="mdc-list-item" href="{{ '/symlink-script.html' | relative_url }}">
+            <span class="mdc-list-item__ripple"></span>
+            <i class="material-icons mdc-list-item__graphic">link</i>
+            <span class="mdc-list-item__text">Symlink Script</span>
+          </a>
+          <a class="mdc-list-item" href="{{ '/brew.html' | relative_url }}">
+            <span class="mdc-list-item__ripple"></span>
+            <i class="material-icons mdc-list-item__graphic">local_cafe</i>
+            <span class="mdc-list-item__text">Homebrew Packages</span>
+          </a>
+          <a class="mdc-list-item" href="{{ '/npm.html' | relative_url }}">
+            <span class="mdc-list-item__ripple"></span>
+            <i class="material-icons mdc-list-item__graphic">javascript</i>
+            <span class="mdc-list-item__text">NPM Packages</span>
+          </a>
+          <a class="mdc-list-item" href="{{ '/neovim.html' | relative_url }}">
+            <span class="mdc-list-item__ripple"></span>
+            <i class="material-icons mdc-list-item__graphic">edit</i>
+            <span class="mdc-list-item__text">Neovim Configuration</span>
+          </a>
+        </nav>
       </div>
-    </footer>
+    </aside>
+
+    <!-- Scrim for drawer overlay -->
+    <div class="mdc-drawer-scrim" id="scrim"></div>
+
+    <!-- Main Content -->
+    <div class="mdc-top-app-bar--fixed-adjust">
+      <main class="main-content">
+        <div class="content-card">
+          {{ content }}
+        </div>
+      </main>
+
+      <!-- Footer -->
+      <footer class="mdc-footer">
+        <div class="footer-content">
+          <p>Managed with <span class="heart">♥</span> by <a href="https://github.com/fralomb" target="_blank">fralomb</a></p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      // Mobile navigation drawer toggle
+      const menuButton = document.getElementById('menu-button');
+      const drawer = document.getElementById('drawer');
+      const scrim = document.getElementById('scrim');
+
+      function toggleDrawer() {
+        drawer.classList.toggle('mdc-drawer--open');
+        scrim.classList.toggle('mdc-drawer-scrim--visible');
+      }
+
+      menuButton.addEventListener('click', toggleDrawer);
+      scrim.addEventListener('click', toggleDrawer);
+
+      // Close drawer when clicking a link
+      const drawerLinks = drawer.querySelectorAll('.mdc-list-item');
+      drawerLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (drawer.classList.contains('mdc-drawer--open')) {
+            toggleDrawer();
+          }
+        });
+      });
+    </script>
   </body>
 </html>
