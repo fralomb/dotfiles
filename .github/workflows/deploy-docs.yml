@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - claude/modernize-docs-ui-*
     paths:
       - 'docs/**'
       - '.github/workflows/deploy-docs.yml'
