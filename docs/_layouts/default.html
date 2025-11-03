@@ -10,100 +10,158 @@
   </head>
 
   <body>
-    <!-- Material Design App Bar -->
-    <header class="mdc-top-app-bar">
-      <div class="mdc-top-app-bar__row">
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-          <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="menu-button">menu</button>
-          <a href="{{ '/' | relative_url }}" class="mdc-top-app-bar__title">
-            {{ site.title | default: site.github.repository_name }}
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+      <div class="top-nav__container">
+        <div class="top-nav__left">
+          <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+            <span class="material-icons">menu</span>
+          </button>
+          <a href="{{ '/' | relative_url }}" class="top-nav__logo">
+            <span class="material-icons">description</span>
+            <span class="top-nav__title">{{ site.title | default: site.github.repository_name }}</span>
           </a>
-        </section>
-        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-          <a href="{{ site.github.repository_url }}" class="mdc-icon-button material-icons github-button" title="View on GitHub" target="_blank">code</a>
-        </section>
+        </div>
+        <div class="top-nav__right">
+          <a href="{{ site.github.repository_url }}" class="btn-github" target="_blank" rel="noopener noreferrer">
+            <span class="material-icons">code</span>
+            <span>View on GitHub</span>
+          </a>
+        </div>
       </div>
     </header>
 
-    <!-- Navigation Drawer -->
-    <aside class="mdc-drawer" id="drawer">
-      <div class="mdc-drawer__content">
-        <nav class="mdc-list">
-          <a class="mdc-list-item" href="{{ '/' | relative_url }}">
-            <span class="mdc-list-item__ripple"></span>
-            <i class="material-icons mdc-list-item__graphic">home</i>
-            <span class="mdc-list-item__text">Home</span>
-          </a>
-          <a class="mdc-list-item" href="{{ '/dotfiles.html' | relative_url }}">
-            <span class="mdc-list-item__ripple"></span>
-            <i class="material-icons mdc-list-item__graphic">settings</i>
-            <span class="mdc-list-item__text">Dotfiles</span>
-          </a>
-          <a class="mdc-list-item" href="{{ '/symlink-script.html' | relative_url }}">
-            <span class="mdc-list-item__ripple"></span>
-            <i class="material-icons mdc-list-item__graphic">link</i>
-            <span class="mdc-list-item__text">Symlink Script</span>
-          </a>
-          <a class="mdc-list-item" href="{{ '/brew.html' | relative_url }}">
-            <span class="mdc-list-item__ripple"></span>
-            <i class="material-icons mdc-list-item__graphic">local_cafe</i>
-            <span class="mdc-list-item__text">Homebrew Packages</span>
-          </a>
-          <a class="mdc-list-item" href="{{ '/npm.html' | relative_url }}">
-            <span class="mdc-list-item__ripple"></span>
-            <i class="material-icons mdc-list-item__graphic">javascript</i>
-            <span class="mdc-list-item__text">NPM Packages</span>
-          </a>
-          <a class="mdc-list-item" href="{{ '/neovim.html' | relative_url }}">
-            <span class="mdc-list-item__ripple"></span>
-            <i class="material-icons mdc-list-item__graphic">edit</i>
-            <span class="mdc-list-item__text">Neovim Configuration</span>
-          </a>
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar__content">
+        <nav class="sidebar__nav">
+          <div class="nav-section">
+            <h3 class="nav-section__title">Documentation</h3>
+            <ul class="nav-list">
+              <li>
+                <a class="nav-item" href="{{ '/' | relative_url }}">
+                  <span class="material-icons">home</span>
+                  <span>Home</span>
+                </a>
+              </li>
+              <li>
+                <a class="nav-item" href="{{ '/dotfiles.html' | relative_url }}">
+                  <span class="material-icons">folder_special</span>
+                  <span>Dotfiles</span>
+                </a>
+              </li>
+              <li>
+                <a class="nav-item" href="{{ '/symlink-script.html' | relative_url }}">
+                  <span class="material-icons">link</span>
+                  <span>Symlink Script</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="nav-section">
+            <h3 class="nav-section__title">Package Management</h3>
+            <ul class="nav-list">
+              <li>
+                <a class="nav-item" href="{{ '/brew.html' | relative_url }}">
+                  <span class="material-icons">coffee</span>
+                  <span>Homebrew</span>
+                </a>
+              </li>
+              <li>
+                <a class="nav-item" href="{{ '/npm.html' | relative_url }}">
+                  <span class="material-icons">inventory_2</span>
+                  <span>NPM Packages</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="nav-section">
+            <h3 class="nav-section__title">Configuration</h3>
+            <ul class="nav-list">
+              <li>
+                <a class="nav-item" href="{{ '/neovim.html' | relative_url }}">
+                  <span class="material-icons">terminal</span>
+                  <span>Neovim</span>
+                </a>
+              </li>
+            </ul>
+          </div>
         </nav>
       </div>
     </aside>
 
-    <!-- Scrim for drawer overlay -->
-    <div class="mdc-drawer-scrim" id="scrim"></div>
+    <!-- Overlay for mobile -->
+    <div class="overlay" id="overlay"></div>
 
-    <!-- Main Content -->
-    <div class="mdc-top-app-bar--fixed-adjust">
-      <main class="main-content">
-        <div class="content-card">
+    <!-- Main Content Area -->
+    <main class="main-wrapper" id="main-wrapper">
+      <div class="content-container">
+        <article class="content">
           {{ content }}
-        </div>
-      </main>
+        </article>
 
-      <!-- Footer -->
-      <footer class="mdc-footer">
-        <div class="footer-content">
-          <p>Managed with <span class="heart">♥</span> by <a href="https://github.com/fralomb" target="_blank">fralomb</a></p>
-        </div>
-      </footer>
-    </div>
+        <!-- Footer -->
+        <footer class="footer">
+          <div class="footer__content">
+            <p>Built with <span class="heart">♥</span> by <a href="https://github.com/fralomb" target="_blank" rel="noopener noreferrer">fralomb</a></p>
+          </div>
+        </footer>
+      </div>
+    </main>
 
     <script>
-      // Mobile navigation drawer toggle
-      const menuButton = document.getElementById('menu-button');
-      const drawer = document.getElementById('drawer');
-      const scrim = document.getElementById('scrim');
+      // Navigation toggle functionality
+      const navToggle = document.getElementById('nav-toggle');
+      const sidebar = document.getElementById('sidebar');
+      const overlay = document.getElementById('overlay');
+      const mainWrapper = document.getElementById('main-wrapper');
+      const body = document.body;
 
-      function toggleDrawer() {
-        drawer.classList.toggle('mdc-drawer--open');
-        scrim.classList.toggle('mdc-drawer-scrim--visible');
+      function toggleSidebar() {
+        sidebar.classList.toggle('sidebar--open');
+        overlay.classList.toggle('overlay--visible');
+        body.classList.toggle('no-scroll');
       }
 
-      menuButton.addEventListener('click', toggleDrawer);
-      scrim.addEventListener('click', toggleDrawer);
+      function closeSidebar() {
+        sidebar.classList.remove('sidebar--open');
+        overlay.classList.remove('overlay--visible');
+        body.classList.remove('no-scroll');
+      }
 
-      // Close drawer when clicking a link
-      const drawerLinks = drawer.querySelectorAll('.mdc-list-item');
-      drawerLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          if (drawer.classList.contains('mdc-drawer--open')) {
-            toggleDrawer();
+      navToggle.addEventListener('click', toggleSidebar);
+      overlay.addEventListener('click', closeSidebar);
+
+      // Close sidebar when clicking a link on mobile
+      const navItems = sidebar.querySelectorAll('.nav-item');
+      navItems.forEach(item => {
+        item.addEventListener('click', () => {
+          if (window.innerWidth < 1024) {
+            closeSidebar();
           }
         });
+      });
+
+      // Handle sidebar state on resize
+      let resizeTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          if (window.innerWidth >= 1024) {
+            closeSidebar();
+          }
+        }, 250);
+      });
+
+      // Highlight active page
+      const currentPath = window.location.pathname;
+      navItems.forEach(item => {
+        const href = item.getAttribute('href');
+        if (currentPath.endsWith(href) || (currentPath === '{{ "/" | relative_url }}' && href === '{{ "/" | relative_url }}')) {
+          item.classList.add('nav-item--active');
+        }
       });
     </script>
   </body>
