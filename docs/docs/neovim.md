@@ -1,5 +1,7 @@
 ---
-layout: default
+id: neovim
+title: Neovim Configuration
+sidebar_label: Neovim
 ---
 
 # Neovim Configuration Details

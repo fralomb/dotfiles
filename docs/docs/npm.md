@@ -1,5 +1,7 @@
 ---
-layout: default
+id: npm
+title: NPM Packages
+sidebar_label: NPM
 ---
 
 # NPM Packages Documentation

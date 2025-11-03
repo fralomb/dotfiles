@@ -1,5 +1,7 @@
 ---
-layout: default
+id: symlink-script
+title: Symlink Script
+sidebar_label: Symlink Script
 ---
 
 # `symlinks` Script Documentation

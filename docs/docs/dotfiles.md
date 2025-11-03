@@ -1,5 +1,7 @@
 ---
-layout: default
+id: dotfiles
+title: Dotfile Configurations
+sidebar_label: Dotfiles
 ---
 
 # Dotfile Configurations

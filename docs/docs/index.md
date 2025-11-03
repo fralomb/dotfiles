@@ -1,5 +1,8 @@
 ---
-layout: default
+id: index
+title: Welcome
+sidebar_label: Home
+slug: /
 ---
 
 # Welcome to Dotfiles Management Documentation

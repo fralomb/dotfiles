@@ -1,5 +1,7 @@
 ---
-layout: default
+id: brew
+title: Homebrew Packages
+sidebar_label: Homebrew
 ---
 
 # Homebrew Packages and Setup
