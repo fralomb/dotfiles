@@ -24,6 +24,11 @@ vim.keymap.set({"n", "v"}, "<leader>X", [["*X]], { desc = 'Delete prev char and 
 vim.keymap.set({"n", "v"}, "<leader>d", [["*d]], { desc = 'Delete text that {motion} moves over (register *)' })
 vim.keymap.set({"n", "v"}, "<leader>D", [["*D]], { desc = 'Delete the characters under the cursor until the end of the line and [count]-1 more lines (register *)' })
 
+-- copy current buffer fullpath into clipboard
+vim.keymap.set('n', '<leader>wb', function()
+  vim.fn.setreg('*', vim.fn.expand('%:p'))
+end, { desc = 'Copy full path of buffer file to clipboard' })
+
 -- Escape key in terminal mode
 vim.keymap.set('t', '<Esc>', [[<C-\><C-N>]], { desc = 'Escape key in terminal mode' })
 

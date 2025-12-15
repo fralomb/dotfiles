@@ -35,7 +35,12 @@ fidget.setup({
 				period = 1
 			}
 		}
-	}
+	},
+	notification = {
+      window = {
+        winblend = 0,
+      },
+    },
 })
 
 -- Package manager for install and manage LSP servers, linters, formatters, etc..

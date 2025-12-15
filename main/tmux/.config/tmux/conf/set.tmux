@@ -10,7 +10,9 @@ setw -g mouse on
 set-option -g focus-events on
 
 # Enable colors on terminals
-set -g default-terminal "screen-256color"
+
+# set -g default-terminal "tmux-256color" # works with iterm2
+set -g default-terminal "screen-256color" # works with Alacritty
 set -ga terminal-overrides ",$TERM:RGB"
 
 # Set parent terminal title to reflect current window in tmux session 

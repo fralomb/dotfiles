@@ -79,3 +79,7 @@ brew "pipx"
 cask "alacritty", args: { no_quarantine: true }
 cask "obsidian"
 cask "drawio"
+cask "deskpad"
+
+# ai
+brew "gemini-cli"
