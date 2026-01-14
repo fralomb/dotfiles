@@ -21,7 +21,7 @@ brew "python@3.11"
 brew "python@3.10"
 brew "virtualenv"
 brew "go"
-brew "node"
+brew "node@20"
 brew "testssl"
 
 #AWS
