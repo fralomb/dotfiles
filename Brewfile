@@ -24,6 +24,9 @@ brew "go"
 brew "node@20"
 brew "testssl"
 
+brew "aisk/homebrew-tap/timeout"
+brew "nvm"
+
 #AWS
 cask "session-manager-plugin"
 brew "awscli"

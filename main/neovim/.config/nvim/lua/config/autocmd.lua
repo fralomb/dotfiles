@@ -60,7 +60,7 @@ local template_group = vim.api.nvim_create_augroup('TemplateFiletype', { clear =
 
 vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 	group = template_group,
-	pattern = { '*.*.tpl', '*.*.tmpl' },
+	pattern = { '*.*.tpl', '*.*.tmpl', '*.*.tftpl' },
 	callback = function()
 		local filename = vim.fn.expand('%:t')
 
@@ -72,7 +72,7 @@ vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
 
 		-- Check if last part is 'tpl' or 'tmpl' and we have at least 3 parts
 		-- (name.ext.tpl/tmpl)
-		if #parts >= 3 and (parts[#parts] == 'tpl' or parts[#parts] == 'tmpl') then
+		if #parts >= 3 and (parts[#parts] == 'tpl' or parts[#parts] == 'tmpl' or parts[#parts] == 'tftpl') then
 			local nested_ext = parts[#parts - 1]
 			vim.notify('Setting filetype to: ' .. nested_ext .. ' for file: ' .. filename)
 			vim.bo.filetype = nested_ext

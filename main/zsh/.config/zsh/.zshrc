@@ -81,3 +81,8 @@ export MISTRAL_BASE_URL="https://api.mistral.ai/v1"
 # export OPENAI_API_KEY=$(cat $HOME/.config/openai)
 export OPENAI_API_KEY="$MISTRAL_API_KEY"
 export OPENAI_BASE_URL="https://api.mistral.ai/v1"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
