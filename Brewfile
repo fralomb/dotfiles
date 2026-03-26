@@ -63,6 +63,7 @@ brew "git-crypt"
 brew "oath-toolkit"
 
 # kubernetes
+brew "kubent"
 brew "kubernetes-cli"
 brew "kubectx"
 brew "helm"

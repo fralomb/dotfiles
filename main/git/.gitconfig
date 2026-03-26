@@ -2,7 +2,8 @@
     path = ~/.gitconfig.personal
 
 [includeIf "gitdir:~/workspace/"]
-    path = ~/.gitconfig.other
+    ; path = ~/.gitconfig.other
+    path = ~/.gitconfig.workspace
 
 [color "status"]
 	added = green bold
