@@ -20,11 +20,11 @@ bind-key > swap-window -d -t +
 
 # Create a popup with all available sessions, ordered by utilization
 bind S display-popup -E "\
-    tmux list-sessions -F '#{?session_attached,,#{session_activity},#{session_name}}' |\
-    sort -r |\
+    tmux list-sessions -F '#{?session_attached,,#{session_activity} #{session_name}}' |\
+    sort -rn |\
     sed '/^$/d' |\
-    cut -d',' -f2- \|
-    fzf --reverse --header jump-to-sessions --preview 'tmux list-windows -t {}'  |\
+    awk 'NF{print \$2}' |\
+    fzf --no-sort --reverse --header jump-to-sessions --preview 'tmux list-windows -t {}'  |\
     xargs tmux switch-client -t"
 
 # back on previous active session
