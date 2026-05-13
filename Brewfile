@@ -14,6 +14,7 @@ brew "wget"
 brew "nmap"
 brew "zsh"
 brew "hurl"
+brew "cliclick"
 # cask "docker"
 brew "podman"
 
@@ -68,6 +69,7 @@ brew "kubernetes-cli"
 brew "kubectx"
 brew "helm"
 tap "weaveworks/tap"
+brew "buildkit"
 
 # lsp
 brew "viu"

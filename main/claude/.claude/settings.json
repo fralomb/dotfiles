@@ -1,0 +1,15 @@
+{
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "agent-orchestration@claude-code-workflows": true,
+    "code-documentation@claude-code-workflows": true,
+    "frontend-mobile-development@claude-code-workflows": true,
+    "cloud-infrastructure@claude-code-workflows": true,
+    "documentation-generation@claude-code-workflows": true,
+    "kubernetes-operations@claude-code-workflows": true
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  }
+}
