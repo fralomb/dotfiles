@@ -18,9 +18,9 @@ fi
 
 if [ -n "$used_pct" ]; then
   used_int=$(printf "%.0f" "$used_pct")
-  ctx_display="${used_int}% of ${ctx_k}"
+  ctx_display="${used_int}%%"
 else
-  ctx_display="0% of ${ctx_k}"
+  ctx_display="0%%"
   used_int=0
 fi
 

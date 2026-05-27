@@ -89,3 +89,5 @@ cask "deskpad"
 
 # ai
 brew "gemini-cli"
+
+brew "bitwarden"
