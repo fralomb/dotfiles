@@ -2,153 +2,116 @@
 
 input=$(cat)
 
-# ── Model ──────────────────────────────────────────────────────────────────────
+# ── Parse ──────────────────────────────────────────────────────────────────────
 model=$(echo "$input" | jq -r '.model.display_name // "Unknown"')
 model_id=$(echo "$input" | jq -r '.model.id // ""')
+used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // 0')
+cwd=$(echo "$input" | jq -r '.cwd // .workspace.current_dir // ""')
+transcript=$(echo "$input" | jq -r '.transcript_path // empty')
+session_id=$(echo "$input" | jq -r '.session_id // empty')
 
-# ── Context window ─────────────────────────────────────────────────────────────
-used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
-ctx_window=$(echo "$input" | jq -r '.context_window.context_window_size // empty')
+# ── TrueColor palette (Tokyo Night) ───────────────────────────────────────────
+CLR_BLUE="\033[38;2;122;162;247m"    # #7aa2f7
+CLR_PURPLE="\033[38;2;187;154;247m"  # #bb9af7
+CLR_MUTED="\033[38;2;86;95;137m"     # #565f89
+CLR_GREEN="\033[38;2;158;206;106m"   # #9ece6a
+CLR_CYAN="\033[38;2;125;207;255m"    # #7dcfff
+CLR_YELLOW="\033[38;2;224;175;104m"  # #e0af68
+CLR_RED="\033[38;2;247;118;145m"     # #f77691
+RESET="\033[0m"
+BOLD="\033[1m"
 
-if [ -n "$ctx_window" ]; then
-  ctx_k=$(echo "$ctx_window" | awk '{printf "%dk", $1/1000}')
+# ── Model (shortened) ──────────────────────────────────────────────────────────
+model_short=$(echo "$model" | sed 's/Claude //')
+model_str="${CLR_PURPLE}${BOLD}${model_short}${RESET}"
+
+# ── Context bar ────────────────────────────────────────────────────────────────
+ctx_int=$(printf "%.0f" "$used_pct" 2>/dev/null || echo 0)
+bar=""
+for i in 1 2 3 4 5; do
+  if [ $((i * 20)) -le "$ctx_int" ]; then
+    bar="${bar}■"
+  else
+    bar="${bar}□"
+  fi
+done
+if [ "$ctx_int" -gt 80 ]; then
+  ctx_clr="$CLR_RED"
+elif [ "$ctx_int" -gt 50 ]; then
+  ctx_clr="$CLR_YELLOW"
 else
-  ctx_k="?"
+  ctx_clr="$CLR_CYAN"
 fi
-
-if [ -n "$used_pct" ]; then
-  used_int=$(printf "%.0f" "$used_pct")
-  ctx_display="${used_int}%%"
-else
-  ctx_display="0%%"
-  used_int=0
-fi
+ctx_str="${ctx_clr}[${bar}] ${ctx_int}%${RESET}"
 
 # ── Git branch ─────────────────────────────────────────────────────────────────
-cwd=$(echo "$input" | jq -r '.cwd // .workspace.current_dir // ""')
-git_branch=""
+git_str=""
 if [ -n "$cwd" ]; then
-  git_branch=$(git -C "$cwd" symbolic-ref --short HEAD 2>/dev/null \
-               || git -C "$cwd" rev-parse --short HEAD 2>/dev/null)
+  branch=$(git -C "$cwd" symbolic-ref --short HEAD 2>/dev/null \
+           || git -C "$cwd" rev-parse --short HEAD 2>/dev/null)
+  [ -n "$branch" ] && git_str="${CLR_GREEN} ${branch}${RESET}"
 fi
 
 # ── Session duration ───────────────────────────────────────────────────────────
-transcript=$(echo "$input" | jq -r '.transcript_path // empty')
-session_duration="n/a"
+dur_str=""
 if [ -n "$transcript" ] && [ -f "$transcript" ]; then
   first_ts=$(jq -r '[.. | objects | select(has("timestamp")) | .timestamp] | first // empty' "$transcript" 2>/dev/null)
   if [ -n "$first_ts" ]; then
-    # macOS date (BSD)
     start_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S" "${first_ts%%.*}" "+%s" 2>/dev/null \
                   || date -d "$first_ts" "+%s" 2>/dev/null)
     if [ -n "$start_epoch" ]; then
-      now_epoch=$(date "+%s")
-      elapsed=$(( now_epoch - start_epoch ))
+      elapsed=$(( $(date "+%s") - start_epoch ))
       h=$(( elapsed / 3600 ))
       m=$(( (elapsed % 3600) / 60 ))
       s=$(( elapsed % 60 ))
       if [ "$h" -gt 0 ]; then
-        session_duration=$(printf "%dh%02dm" "$h" "$m")
+        dur_str="${CLR_MUTED}⏱ $(printf "%dh%02dm" "$h" "$m")${RESET}"
       elif [ "$m" -gt 0 ]; then
-        session_duration=$(printf "%dm%02ds" "$m" "$s")
+        dur_str="${CLR_MUTED}⏱ $(printf "%dm%02ds" "$m" "$s")${RESET}"
       else
-        session_duration="${s}s"
+        dur_str="${CLR_MUTED}⏱ ${s}s${RESET}"
       fi
     fi
   fi
 fi
 
-# ── Thinking enabled ───────────────────────────────────────────────────────────
-thinking="off"
+# ── Thinking ───────────────────────────────────────────────────────────────────
 if echo "$model_id" | grep -qi "thinking"; then
-  thinking="on"
+  think_str="${CLR_YELLOW}${BOLD}✦ extended thinking${RESET}"
+else
+  think_str="${CLR_MUTED}✦ extended thinking${RESET}"
 fi
 
-# ── Other active Claude Code sessions ─────────────────────────────────────────
-# Count distinct Claude Code processes; subtract 1 for the current one.
+# ── Other sessions ─────────────────────────────────────────────────────────────
 raw_sessions=$(pgrep -f "claude" 2>/dev/null | wc -l | tr -d ' ')
-other_sessions=$(( raw_sessions > 1 ? raw_sessions - 1 : 0 ))
+other=$(( raw_sessions > 1 ? raw_sessions - 1 : 0 ))
+if [ "$other" -gt 0 ]; then
+  sess_str="${CLR_BLUE}${BOLD}⊡ ${other} session$([ "$other" -gt 1 ] && echo s)${RESET}"
+else
+  sess_str="${CLR_MUTED}⊡ 1 session${RESET}"
+fi
 
-# ── Agents running in current session ─────────────────────────────────────────
-session_id=$(echo "$input" | jq -r '.session_id // empty')
+# ── Agents ─────────────────────────────────────────────────────────────────────
 agents=0
 if [ -n "$session_id" ]; then
   agents=$(pgrep -f "$session_id" 2>/dev/null | wc -l | tr -d ' ')
 fi
-
-# ── Render ─────────────────────────────────────────────────────────────────────
-RESET='\033[0m'
-BOLD='\033[1m'
-DIM='\033[2m'
-
-C_PURPLE='\033[35m'
-C_CYAN='\033[36m'
-C_YELLOW='\033[33m'
-C_GREEN='\033[32m'
-C_BLUE='\033[34m'
-C_RED='\033[31m'
-C_WHITE='\033[37m'
-C_ORANGE='\033[38;5;208m'
-
-PIPE="${DIM}  |  ${RESET}"
-
-# -- Model block
-model_block="${C_PURPLE}${BOLD}${model}${RESET}"
-
-# -- Context block: color reflects pressure
-if [ "$used_int" -ge 80 ] 2>/dev/null; then
-  ctx_color="$C_RED"
-elif [ "$used_int" -ge 50 ] 2>/dev/null; then
-  ctx_color="$C_YELLOW"
-else
-  ctx_color="$C_GREEN"
-fi
-ctx_block="${ctx_color}ctx ${ctx_display}${RESET}"
-
-# -- Git block
-if [ -n "$git_branch" ]; then
-  git_block="${C_CYAN} ${git_branch}${RESET}"
-else
-  git_block=""
-fi
-
-# -- Duration block
-dur_block="${C_BLUE}⏱ ${session_duration}${RESET}"
-
-# -- Thinking block
-if [ "$thinking" = "on" ]; then
-  think_block="${C_YELLOW}${BOLD}✦ thinking on${RESET}"
-else
-  think_block="${DIM}thinking off${RESET}"
-fi
-
-# -- Sessions block
-if [ "$other_sessions" -gt 0 ]; then
-  sess_label="${other_sessions} other session(s)"
-  sess_block="${C_ORANGE}⊡ ${sess_label}${RESET}"
-else
-  sess_block="${DIM}⊡ solo session${RESET}"
-fi
-
-# -- Agents block
 if [ "$agents" -gt 0 ]; then
-  agent_block="${C_YELLOW}⚙ ${agents} agent(s)${RESET}"
+  agent_str="${CLR_YELLOW}${BOLD}⚙ ${agents} agent$([ "$agents" -gt 1 ] && echo s)${RESET}"
 else
-  agent_block="${DIM}⚙ no agents${RESET}"
+  agent_str="${CLR_MUTED}⚙ 0 agents${RESET}"
 fi
 
-# ── Assemble two groups ────────────────────────────────────────────────────────
-#   Group A: identity  →  model | context | git branch
-#   Group B: session   →  duration | thinking | sessions | agents
+# ── Assemble ───────────────────────────────────────────────────────────────────
+SEP=" ${CLR_MUTED}│${RESET} "
+SEGS=("${CLR_BLUE}${BOLD}CC${RESET}" "$model_str" "$ctx_str")
+[ -n "$git_str" ] && SEGS+=("$git_str")
+[ -n "$dur_str" ]  && SEGS+=("$dur_str")
+SEGS+=("$think_str" "$sess_str" "$agent_str")
 
-group_a="${model_block}${PIPE}${ctx_block}"
-if [ -n "$git_block" ]; then
-  group_a="${group_a}${PIPE}${git_block}"
-fi
+out=""
+for seg in "${SEGS[@]}"; do
+  [ -z "$out" ] && out="$seg" || out="${out}${SEP}${seg}"
+done
 
-group_b="${dur_block}${PIPE}${think_block}${PIPE}${sess_block}${PIPE}${agent_block}"
-
-# Wide separator between the two groups
-GSEP="${DIM}    //    ${RESET}"
-
-printf "${group_a}${GSEP}${group_b}\n"
+echo -e "$out"

@@ -1,0 +1,16 @@
+{
+  "name": "personal-agents",
+  "version": "1.0.0",
+  "description": "Custom general-purpose subagents for cloud infrastructure review, CI debugging, documentation writing, and pattern finding.",
+  "author": {
+    "name": "User",
+    "email": "user@example.com"
+  },
+  "keywords": [
+    "infrastructure",
+    "ci",
+    "documentation",
+    "patterns",
+    "subagents"
+  ]
+}

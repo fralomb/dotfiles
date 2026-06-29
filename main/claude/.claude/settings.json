@@ -1,15 +1,16 @@
 {
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline-command.sh"
+  },
   "enabledPlugins": {
-    "superpowers@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": false,
     "agent-orchestration@claude-code-workflows": true,
-    "code-documentation@claude-code-workflows": true,
-    "frontend-mobile-development@claude-code-workflows": true,
+    "code-documentation@claude-code-workflows": false,
+    "frontend-mobile-development@claude-code-workflows": false,
     "cloud-infrastructure@claude-code-workflows": true,
     "documentation-generation@claude-code-workflows": true,
     "kubernetes-operations@claude-code-workflows": true
   },
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline-command.sh"
-  }
+  "editorMode": "vim"
 }

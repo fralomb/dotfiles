@@ -1,0 +1,21 @@
+{
+  "colorScheme": "tokyo night",
+  "enableTerminalSandbox": true,
+  "gcp": {
+    "project": "vf-devit-ca-lab",
+    "location": "eu"
+  },
+  "model": "Gemini 3.5 Flash (High)",
+  "notifications": true,
+  "showFeedbackSurvey": false,
+  "editor": "vim",
+  "toolPermission": "always-proceed",
+  "historySize": 2000,
+  "showTips": true,
+  "verbosity": "high",
+  "statusLine": {
+    "type": "command",
+    "command": "/Users/fl/.gemini/antigravity-cli/statusline.sh",
+    "enabled": true
+  }
+}
