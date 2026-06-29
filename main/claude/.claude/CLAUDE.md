@@ -97,3 +97,16 @@ tool when the task matches their domain:
 
 Consult `~/personal/second-brain/.ai-operator/AGENTS.md` for additional agents
 and routing logic.
+
+---
+
+## Auth Error Handling
+
+**AWS:** If any `aws` CLI command returns an authentication or authorization error
+(`ExpiredTokenException`, `InvalidClientTokenId`, `UnauthorizedException`, `AuthFailure`,
+`NoCredentialProviders`, or HTTP 403), stop immediately, do not retry, and tell the user
+to renew their credentials. Always run `aws` commands using the profile in `$AWS_PROFILE`.
+
+**kubectl:** If any `kubectl` command returns an unauthorized or forbidden error
+(`Unauthorized`, `Forbidden`, `Unable to connect to the server`, or `x509`), stop
+immediately and tell the user to update their kubeconfig before continuing.

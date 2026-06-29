@@ -29,7 +29,7 @@ model_str="${CLR_PURPLE}${BOLD}${model_short}${RESET}"
 ctx_int=$(printf "%.0f" "$used_pct" 2>/dev/null || echo 0)
 bar=""
 for i in 1 2 3 4 5; do
-  if [ $((i * 20)) -le "$ctx_int" ]; then
+  if [ $(( (i - 1) * 20 )) -lt "$ctx_int" ]; then
     bar="${bar}■"
   else
     bar="${bar}□"
