@@ -91,23 +91,20 @@ else
   sess_str="${CLR_MUTED}⊡ 1 session${RESET}"
 fi
 
-# ── Agents ─────────────────────────────────────────────────────────────────────
-agents=0
-if [ -n "$session_id" ]; then
-  agents=$(pgrep -f "$session_id" 2>/dev/null | wc -l | tr -d ' ')
-fi
-if [ "$agents" -gt 0 ]; then
-  agent_str="${CLR_YELLOW}${BOLD}⚙ ${agents} agent$([ "$agents" -gt 1 ] && echo s)${RESET}"
-else
-  agent_str="${CLR_MUTED}⚙ 0 agents${RESET}"
+# ── Working directory ──────────────────────────────────────────────────────────
+cwd_str=""
+if [ -n "$cwd" ]; then
+  short_cwd="${cwd/#$HOME/~}"
+  cwd_str="${CLR_MUTED}${short_cwd}${RESET}"
 fi
 
 # ── Assemble ───────────────────────────────────────────────────────────────────
 SEP=" ${CLR_MUTED}│${RESET} "
-SEGS=("${CLR_BLUE}${BOLD}CC${RESET}" "$model_str" "$ctx_str")
-[ -n "$git_str" ] && SEGS+=("$git_str")
+SEGS=("${CLR_BLUE}${BOLD}Claude${RESET}" "$model_str" "$ctx_str")
+[ -n "$cwd_str" ]  && SEGS+=("$cwd_str")
+[ -n "$git_str" ]  && SEGS+=("$git_str")
 [ -n "$dur_str" ]  && SEGS+=("$dur_str")
-SEGS+=("$think_str" "$sess_str" "$agent_str")
+SEGS+=("$think_str" "$sess_str")
 
 out=""
 for seg in "${SEGS[@]}"; do
