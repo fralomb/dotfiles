@@ -5,6 +5,11 @@
     ; path = ~/.gitconfig.other
     path = ~/.gitconfig.workspace
 
+[alias]
+	st = status
+	co = checkout
+	tree = log --all --decorate --oneline --graph
+
 [color "status"]
 	added = green bold
 	changed = yellow
